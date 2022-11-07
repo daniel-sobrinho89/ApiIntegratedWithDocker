@@ -1,0 +1,42 @@
+﻿version: '1'
+
+services:
+  docker-api-compose:
+    image: api-integrated-with-docker:v1
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    ports:
+      - "5010:80"
+      - "5011:443"
+    networks:
+      - citus-compose-network
+
+  docker-postgres-compose:
+    image: citusdata/citus
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "thisIsMyPass12345"
+    ports:
+      - "15432:5432"
+    networks:
+      - citus-compose-network
+
+  docker-pgadmin-compose:
+   image: dpage/pgadmin4
+   environment:
+     PGADMIN_DEFAULT_EMAIL: "daniel@gmail.com"
+     PGADMIN_DEFAULT_PASSWORD: "PgAdmin2021!"
+   ports:
+     - "16543:5000"
+   depends_on:
+     - docker-postgres-compose
+   networks:
+     - citus-compose-network
+
+networks:
+  citus-compose-network:
+    driver: bridge

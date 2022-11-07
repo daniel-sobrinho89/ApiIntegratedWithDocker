@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ApiIntegratedWithDockerMigrations": {
+      "commandName": "Project",
+      "commandLineArgs": "up --connectionString \"Server=localhost;Database=postgres;Port=15432;User Id=admin;Password=thisIsMyPass12345;"
+    }
+  }
+}
