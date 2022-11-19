@@ -23,7 +23,7 @@ public class OrderController : ControllerBase
         OperationId = "GetOrders",
         Tags = new[] { "Orders" }
     )]
-    [SwaggerResponse(200, "The accounting ledger.", typeof(OrdersResponse), ContentTypes = new string[] { "application/json" })]
+    [SwaggerResponse(200, "The order.", typeof(OrdersResponse), ContentTypes = new string[] { "application/json" })]
     public async Task<IActionResult> GetOrders()
     {
         var orders = await _orderRepository.Get();

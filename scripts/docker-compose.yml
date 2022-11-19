@@ -2,7 +2,7 @@
 
 services:
   docker-api-compose:
-    image: api-integrated-with-docker:v1
+    image: api-integrated-with-docker:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
@@ -31,7 +31,7 @@ services:
      PGADMIN_DEFAULT_EMAIL: "daniel@gmail.com"
      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2021!"
    ports:
-     - "16543:5000"
+     - "16543:80"
    depends_on:
      - docker-postgres-compose
    networks:
