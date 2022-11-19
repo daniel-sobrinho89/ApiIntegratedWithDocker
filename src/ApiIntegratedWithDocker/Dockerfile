@@ -3,14 +3,14 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ApiIntegratedWithDocker.csproj", "src/ApiIntegratedWithDocker/"]
+COPY ["src/ApiIntegratedWithDocker/ApiIntegratedWithDocker.csproj", "src/ApiIntegratedWithDocker/"]
 RUN dotnet restore "src/ApiIntegratedWithDocker/ApiIntegratedWithDocker.csproj"
 COPY . .
 WORKDIR "/src"
-RUN dotnet build "ApiIntegratedWithDocker.csproj" -c Release -o /app/build
+RUN dotnet build "src/ApiIntegratedWithDocker/ApiIntegratedWithDocker.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ApiIntegratedWithDocker.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "src/ApiIntegratedWithDocker/ApiIntegratedWithDocker.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
