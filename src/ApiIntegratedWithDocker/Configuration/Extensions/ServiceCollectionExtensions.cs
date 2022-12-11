@@ -1,4 +1,5 @@
-﻿using ApiIntegratedWithDocker.Infrastructure;
+﻿using ApiIntegratedWithDocker.Domain.Services;
+using ApiIntegratedWithDocker.Infrastructure;
 using ApiIntegratedWithDocker.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -6,8 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ApiIntegratedWithDocker.Configuration.Extensions;
 
-public static class WebApplicationBuilderExtensions
+public static class ServiceCollectionExtensions
 {
+    public static void RegisterAutoMapper(this IServiceCollection services)
+        => services.AddAutoMapper(typeof(Program));
+
+    public static void AddServices(this IServiceCollection services) =>
+        services.AddScoped<OrderService>();
+
     public static void AddRepositories(this IServiceCollection services) =>
         services.AddScoped<OrderRepository>();
 

@@ -12,7 +12,7 @@ public class CreateOrderTable : Migration
             .WithColumn("id")
                 .AsGuid()
                 .PrimaryKey()
-            .WithColumn("name")
+            .WithColumn("description")
                 .AsString(20)
                 .NotNullable()
             .WithColumn("created_at")
